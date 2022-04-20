@@ -1,5 +1,7 @@
 # daily-planner
 
+https://tj-tieso.github.io/daily-planner
+
 ## User Story
 
 AS AN employee with a busy schedule
