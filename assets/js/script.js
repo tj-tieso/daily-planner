@@ -1,43 +1,44 @@
-// WHEN I open the planner
-// THEN the current day is displayed at the top of the calendar
-// WHEN I view the time blocks for that day
-// THEN each time block is color-coded to indicate whether it is in the past, present, or future
-// WHEN I click into a time block
-// THEN I can enter an event
-// WHEN I click the save button for that time block
-// THEN the text for that event is saved in local storage
-// WHEN I refresh the page
-// THEN the saved events persist
-
-// START - Global Variables
-var events = {};
 var saveBtn = document.querySelector(".save-btn");
 
-function saveText(e) {
-  // take text/time/date from .description and save to local storage
-  localStorage.setItem("event", JSON.stringify(events));
-  console.log(events);
-}
+var auditEvents = function () {
+  var currentHour = moment().hour();
+  console.log(currentHour);
+  $(".row").each(function () {
+    var timeBlock = parseInt($(this).attr("id"));
+    console.log(timeBlock);
+
+    // change color
+    if (timeBlock < currentHour) {
+      $(this).addClass("past");
+    } else if (timeBlock === currentHour) {
+      $(this).addClass("present");
+    } else {
+      $(this).addClass("future");
+    }
+  });
+};
+
+var loadEvents = function () {
+  $("#9 .description").val(localStorage.getItem("9"));
+  $("#10 .description").val(localStorage.getItem("10"));
+  $("#11 .description").val(localStorage.getItem("11"));
+  $("#12 .description").val(localStorage.getItem("12"));
+  $("#13 .description").val(localStorage.getItem("13"));
+  $("#14 .description").val(localStorage.getItem("14"));
+  $("#15 .description").val(localStorage.getItem("15"));
+  $("#16 .description").val(localStorage.getItem("16"));
+  $("#17 .description").val(localStorage.getItem("17"));
+
+  auditEvents();
+};
 
 // Save events on click
 $(".save-btn").click(function () {
-  console.log("save button clicked");
-  var eventTime = $(this).closest(".time-block").attr("id");
-  console.log(eventTime);
-  // var eventText = from textarea;
-  //console.log(eventText);
+  var eventTime = $(this).parent().attr("id");
+
+  var eventText = $(this).siblings(".description").val().trim();
+
+  localStorage.setItem(eventTime, eventText);
 });
 
-var auditEvents = function () {
-  console.log("this will change colors of text area");
-};
-
-// get description/date and hour from local storage
-var loadEvents = function () {
-  console.log("loading description");
-};
-
-// event listeners
-// saveBtn.addEventListener("click", saveText, false);
-auditEvents();
 loadEvents();
