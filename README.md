@@ -2,6 +2,8 @@
 
 https://tj-tieso.github.io/daily-planner
 
+![Alt text](/assets/images/Screenshot.png "App Screenshot")
+
 ## User Story
 
 AS AN employee with a busy schedule
